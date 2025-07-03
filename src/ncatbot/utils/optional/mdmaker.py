@@ -7,7 +7,7 @@ from pathlib import Path
 
 import markdown
 from pygments.formatters import HtmlFormatter
-from pyppeteer import launch
+from playwright.async_api import Playwright
 
 from ncatbot.utils.logger import get_log
 
@@ -148,17 +148,20 @@ async def html_to_png(html_content, output_png, chrome_executable=None):
     if chrome_executable:
         launch_options["executablePath"] = chrome_executable
 
-    browser = await launch(launch_options)
-    page = await browser.newPage()
+    browser = await Playwright(launch_options).chromium.launch()
+    page = await browser.new_page()
+    
 
-    await page.goto(file_url, {"waitUntil": "networkidle0"})
+    await page.goto(file_url)
+
+    await page.wait_for_load_state("networkidle")
 
     content_height = await page.evaluate("document.documentElement.scrollHeight")
-    await page.setViewport(
+    await page.set_viewport_size(
         {"width": 1280, "height": content_height}
     )  # 如果觉得截取出来的图片过宽，修改width即可
 
-    await page.screenshot({"path": output_png, "fullPage": False})
+    await page.screenshot(path=output_png, full_page=False)
 
     await browser.close()
 
