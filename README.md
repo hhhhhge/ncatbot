@@ -19,6 +19,8 @@
 
 NcatBot 是基于 onebot11协议 的 Python SDK, 它提供了一套方便易用的 Python 接口用于开发 QQ 机器人.
 
+此项目修改为playwright渲染后端
+
 </div>
 
 ## 如何使用
