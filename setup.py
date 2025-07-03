@@ -19,7 +19,7 @@ from pathlib import Path
 from setuptools import setup, find_packages
 
 # 基础配置 --------------------------------------------------------------
-PACKAGE_NAME = "ncatbot"  # 更改为你的包名 (PyPI显示的名称)
+PACKAGE_NAME = "ncatbot-playwright"  # 更改为你的包名 (PyPI显示的名称)
 AUTHOR = "木子"         # 作者/维护者姓名
 EMAIL = "lyh_02@qq.com"  # 联系邮箱
 URL = "https://github.com/liyihao1110/ncatbot"  # 项目主页
